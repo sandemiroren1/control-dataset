@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Personal Claude config
+CLAUDE.local.md
+
+# Generated data + downloads (regenerate with src/generate.py)
+data/
+examples/*.png
