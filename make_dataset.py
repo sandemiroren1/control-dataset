@@ -3,8 +3,8 @@ import os, csv, random, urllib.request, tarfile
 import numpy as np
 from PIL import Image
 
-N_PAIRS, SIZE, SEED, NORMALIZE = 20000, 160, 67, True
-ALPHAS = [round(a, 2) for a in np.linspace(0, 1, 5)]
+N_PAIRS, SIZE, SEED, NORMALIZE = 40000, 160, 67, True
+ALPHAS = [0.1,0.3,0.5]
 URL = "https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-160.tgz"
 CLASSES = {"n01440764": "tench", "n02102040": "english_springer", "n02979186": "cassette_player",
            "n03000684": "chain_saw", "n03028079": "church", "n03394916": "french_horn",
@@ -33,17 +33,30 @@ def load(path):
         # Normalize everything to N(0.5,1/4)
         a = np.clip((a - a.mean()) / (a.std() + 1e-6) * 0.25 + 0.5, 0, 1)
     return a
+def sample(sampled_pairs):
+
+    c1, c2 = random.sample(list(by_class), 2)
+    p1, p2 = random.choice(by_class[c1]), random.choice(by_class[c2])
+    pair = (p1,p2)
+    if pair in sampled_pairs:
+        return sample(sampled_pairs)
+    sampled_pairs.add(pair)
+    return p1,p2, c1,c2
+    
+
 
 random.seed(SEED)
 os.makedirs("data/blended", exist_ok=True)
 rows = []
-for i in range(N_PAIRS):
-    if i % 200 == 0:
-        print(f"{i}/{N_PAIRS} done")
-    c1, c2 = random.sample(list(by_class), 2)
-    p1, p2 = random.choice(by_class[c1]), random.choice(by_class[c2])
-    img1, img2 = load(p1), load(p2)
-    for alpha in ALPHAS:
+
+
+for alpha in ALPHAS:
+    sampled_pairs = set()
+    for i in range(N_PAIRS):
+        if i % 200 == 0:
+            print(f"{i}/{N_PAIRS} done")
+        p1,p2 ,c1,c2= sample(sampled_pairs)
+        img1, img2 = load(p1), load(p2)
         blended = alpha * img1 + (1 - alpha) * img2          
         name = f"pair{i:04d}_a{alpha:.1f}.png"
         Image.fromarray((blended * 255).astype(np.uint8)).save(f"data/blended/{name}")
