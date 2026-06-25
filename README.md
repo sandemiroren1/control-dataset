@@ -74,7 +74,9 @@ In conclusion, in this post I provide a dataset that can be used to test a model
 
 
 
+### AI DISCLOSURE
 
+AI was used only as a coding assistant or as a brainstorming tool and was not used to replace critical thinking or decision making.
 
 
 ## Citations 
