@@ -24,7 +24,7 @@ I say that an object's label is the "main label" of a mixture of images if its t
 
 
 **Figure 1**: The blending of two images with $\alpha\in\{0,0.1,0.2,\ldots,1\}$. Up until the 6th image, the main object is the yellow parachute as it has a higher opacity.
-![Example image](example.jpg)
+![Example image](example.png)
 
 ## The purpose of the dataset
 The main purpose of this dataset is to test if an image recognition model can correctly recognize the "main label" of an image when there are two images overlapped with one another. Consequently, this also tests if the model can recognize an object when there is another motif in the picture that might belong to another class, which models fall victim to [1]. However, while [1] did show that models can get "distracted" by another object in the picture, they did so by applying a "patch"/"sticker" to the image that resembles another object. Although that is an interesting result, I think it is also interesting to have a dataset that checks how models behave when that object's image is added faintly to an image. 
@@ -54,7 +54,7 @@ The dataset was created while ensuring that there aren't any duplicate images in
 **Figure 2**: A garbage truck and a gas pump mixed together with $\alpha=0.1$ and the garbage truck being the dominant object.
 
 
-![Example 2](examples/example1.jpg) 
+![Example 2](examples/example1.png) 
 
 In Figure 2 we can see a subtle mixture of two images. To the human eye, the garbage truck is prominent but the gas pump is not. With the use of this dataset, it can be observed if a model fails at even the slightest of resemblense to another object. 
 
@@ -62,7 +62,7 @@ In Figure 2 we can see a subtle mixture of two images. To the human eye, the gar
 **Figure 3**: (a) A picture of a dog mixed with a church with the dog being dominant, $\alpha=0.3$. (b) A picture of a dog and a parachute with $\alpha=0.5$. Both objects are equally dominant.
 
 
-![Example 2](examples/example2.jpg) ![Example 3](examples/example3.jpg)
+![Example 2](examples/example2.png) ![Example 3](examples/example3.png)
 
 
 The dataset also provides harder examples as it can be seen in *Figure 3*. In both examples it is a bit harder to tell which object is the prominent one, in fact for *Figure 3.b* one there isn't one! I believe that training a model to be correct on these examples can provide an interesting aspect of robustness. Moreover, it can also be interesting to see *how* the model changes its classification. Does it perhaps grok that the main object is a dog, but suddenly labels it as a Golden Retreiver rather than a Husky when the non-dominant picture is changed?
