@@ -3,7 +3,7 @@
 *Assignment for Fundamental Research in Machine and Deep Learning course at TU Delft*
 
 
-**Disclaimer: The full dataset was too big to upload but you can create it exactly by running the code in the Github. A sample of 1000 datapoints has also been provided in the repository**
+**Disclaimer: The full dataset was too big to upload but you can create it exactly by running the code in the [Github](https://github.com/sandemiroren1/control-dataset). A sample of 1000 datapoints has also been provided in the repository**
 
 
 
